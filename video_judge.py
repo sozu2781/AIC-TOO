@@ -12,6 +12,7 @@ def judge_fromVideo(video_file, frame_interval=30):
     #print(round(fps))
     
     scan_count =0
+    error_list =[]
     while True:
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_interval*scan_count)
         ret, frame_bgr = cap.read()
@@ -20,10 +21,10 @@ def judge_fromVideo(video_file, frame_interval=30):
         frame =frame_bgr[:,:,[2,1,0]]
         
         #ここにリボンの色正誤判定を入れる
-        ans=
+        ans= #True or False
         
         
-        error_list =[]
+        
         if ans==False:
             second= (frame_interval/fps)*scan_count
             minute=second//60
