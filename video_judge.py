@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 from PIL import Image
+from morikawa_20201028 import image_recognition
 
-
-video_file ="01-01.mp4"
+video_file ="01-01_w.mp4"
 def judge_fromVideo(video_file, frame_interval=30):
 
     cap =cv2.VideoCapture(video_file)
@@ -16,24 +16,25 @@ def judge_fromVideo(video_file, frame_interval=30):
     while True:
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_interval*scan_count)
         ret, frame_bgr = cap.read()
-        if frame_bgr==None:
+        if ret==False:
             break
         frame =frame_bgr[:,:,[2,1,0]]
         
-        #ここにリボンの色正誤判定を入れる
-        ans= #True or False
+        #秒数計算
+        second= (frame_interval/fps)*scan_count
+        minute=int(second//60)
+        second=int(second%60)
+        time =str(minute)+"m "+str(second)+'s'
         
-        
+        ans= image_recognition(frame,time)
         
         if ans==False:
-            second= (frame_interval/fps)*scan_count
-            minute=second//60
-            second=second%60
-            error_list.append(str(minute)+":"+str(second))
+            error_list.append(time)
         
         scan_count +=1
         
     print(error_list)
+judge_fromVideo(video_file)
 
 """
 im=Image.fromarray(frame)
