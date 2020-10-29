@@ -18,7 +18,7 @@ def image_recognition(img,time):
     ar =copy.copy(filearray)
     h=len(ar)
     w=len(ar[0])
-    
+
 
     face=np.zeros((h,w+1))
     basyo_h=0
@@ -170,9 +170,9 @@ def image_recognition(img,time):
         count_all=1
         while s_w<s_w1:
             while s_h<s_h1:
-                if ar[s_h][s_w][0] < 10 and face[s_h][s_w] == 0:
+                if ar[s_h][s_w][0] < 15 and face[s_h][s_w] == 0:
                     count_all=count_all+1
-                    if ar[s_h][s_w][1]>100 and ar[s_h][s_w][1]<160 and ar[s_h][s_w][2]>40 and ar[s_h][s_w][2]<80:
+                    if ar[s_h][s_w][1]>100 and ar[s_h][s_w][1]<180 and ar[s_h][s_w][2]>40 and ar[s_h][s_w][2]<85:
                         count_green=count_green+1
                 s_h=s_h+1
             s_w=s_w+1
@@ -184,7 +184,7 @@ def image_recognition(img,time):
         ##
         
         if green_rate>0.7 and count_all>100:
-            print("色：正解")
+            print("色：正解"+str(time))
             ans=True
             for j in range(w-1):
                 ar[0][j]=[0,255,0]
@@ -213,7 +213,8 @@ def image_recognition(img,time):
     
     return ans
 
-#print(image_recognition(ar, "1"))
+#img =im=Image.open("read 0m 0s.png")
+#print(image_recognition(img, "1"))
 
 """
 #######

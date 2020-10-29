@@ -3,8 +3,8 @@ import numpy as np
 from PIL import Image
 from morikawa_28m import image_recognition
 
-video_file ="01-01_w.mp4"
-def judge_fromVideo(video_file, frame_interval=30):
+video_file ="01-03.mp4"
+def judge_fromVideo(video_file, frame_interval=6):
 
     cap =cv2.VideoCapture(video_file)
     fps =cap.get(cv2.CAP_PROP_FPS)
@@ -29,6 +29,8 @@ def judge_fromVideo(video_file, frame_interval=30):
         second=int(second%60)
         time =str(minute)+"m "+str(second)+'s'
         
+        #img.save('read '+time+'.png')
+        #print("save")
         ans= image_recognition(img,time)
         
         if ans==False:
