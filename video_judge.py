@@ -1,13 +1,12 @@
 import cv2
 import numpy as np
 from PIL import Image
-from morikawa_20201028 import image_recognition
+from morikawa_28m import image_recognition
 
 video_file ="01-01_w.mp4"
 def judge_fromVideo(video_file, frame_interval=30):
 
     cap =cv2.VideoCapture(video_file)
-    print(cap.isOpened())
     fps =cap.get(cv2.CAP_PROP_FPS)
     #print(round(fps))
     
@@ -19,6 +18,10 @@ def judge_fromVideo(video_file, frame_interval=30):
         if ret==False:
             break
         frame =frame_bgr[:,:,[2,1,0]]
+        img=Image.fromarray(frame)
+        img=img.resize((1280,720))
+        #frame=np.array(img)
+        #print(frame.shape)
         
         #秒数計算
         second= (frame_interval/fps)*scan_count
@@ -26,7 +29,7 @@ def judge_fromVideo(video_file, frame_interval=30):
         second=int(second%60)
         time =str(minute)+"m "+str(second)+'s'
         
-        ans= image_recognition(frame,time)
+        ans= image_recognition(img,time)
         
         if ans==False:
             error_list.append(time)

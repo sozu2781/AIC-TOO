@@ -1,13 +1,20 @@
 import numpy as np
 from PIL import Image
 import copy
-
-def image_recognition(filearray,time):
+"""
+filename="Teacher_1-1_51.png"
+im=Image.open(filename)
+ar=np.array(im)
+print(ar.shape)
+"""
+def image_recognition(img,time):
     """
     filename="wrong_imgs-" + str(filenumber) + ".png" #ここにファイルネームを入れる #"Teacher_2-3_" + str(filenumber) + ".png"
     im=Image.open(filename)
-    ar=np.array(im)
+    
     """
+    filearray=np.array(img)
+    
     ar =copy.copy(filearray)
     h=len(ar)
     w=len(ar[0])
@@ -205,6 +212,9 @@ def image_recognition(filearray,time):
     #im.save(filename+'hantei_A0.png')
     
     return ans
+
+#print(image_recognition(ar, "1"))
+
 """
 #######
 for i in range(199): #ここにテストしたい枚数が入る
